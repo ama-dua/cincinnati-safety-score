@@ -1,0 +1,31 @@
+{
+  "rows": 82367,
+  "date_min": "2020-01-01",
+  "date_max": "2026-11-16",
+  "arrest_rate": 0.1346,
+  "test_accuracy": 0.7168,
+  "test_precision": 0.2686,
+  "test_recall": 0.641,
+  "test_f1": 0.3785,
+  "test_roc_auc": 0.7616,
+  "test_log_loss": 0.5071,
+  "baseline_accuracy_all_no_arrest": 0.8654,
+  "n_test": 16474,
+  "feature_importance": {
+    "year": 0.0449,
+    "month": 0.0524,
+    "day": 0.0623,
+    "hour": 0.0679,
+    "minute": 0.0996,
+    "dayofweek": 0.0457,
+    "lat": 0.137,
+    "lon": 0.1196,
+    "ucr_group": 0.3706
+  },
+  "thesis_reference": {
+    "thesis_test_accuracy_smote_full_dataset": 0.8847,
+    "thesis_rows_2010_2021": 133246,
+    "thesis_arrests": 13208,
+    "note": "Thesis applied SMOTE before splitting, so its 88% is not directly comparable to the honest held-out metrics above."
+  }
+}

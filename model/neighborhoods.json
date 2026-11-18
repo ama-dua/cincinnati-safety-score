@@ -1,0 +1,410 @@
+[
+  {
+    "name": "Avondale",
+    "raw_name": "Avondale",
+    "lat": 39.145915,
+    "lon": -84.494656,
+    "property_crimes": 3483,
+    "arrest_rate": 0.1097
+  },
+  {
+    "name": "Bond Hill",
+    "raw_name": "Bond Hill",
+    "lat": 39.177803,
+    "lon": -84.469176,
+    "property_crimes": 1523,
+    "arrest_rate": 0.109
+  },
+  {
+    "name": "California",
+    "raw_name": "California",
+    "lat": 39.07037,
+    "lon": -84.423007,
+    "property_crimes": 93,
+    "arrest_rate": 0.172
+  },
+  {
+    "name": "Camp Washington",
+    "raw_name": "Camp Washington",
+    "lat": 39.137382,
+    "lon": -84.537582,
+    "property_crimes": 1042,
+    "arrest_rate": 0.1161
+  },
+  {
+    "name": "Carthage",
+    "raw_name": "Carthage",
+    "lat": 39.195749,
+    "lon": -84.481007,
+    "property_crimes": 1013,
+    "arrest_rate": 0.1056
+  },
+  {
+    "name": "Clifton",
+    "raw_name": "Clifton",
+    "lat": 39.146996,
+    "lon": -84.522202,
+    "property_crimes": 2087,
+    "arrest_rate": 0.0795
+  },
+  {
+    "name": "College Hill",
+    "raw_name": "College Hill",
+    "lat": 39.198341,
+    "lon": -84.543911,
+    "property_crimes": 1944,
+    "arrest_rate": 0.0823
+  },
+  {
+    "name": "Columbia Tusculum",
+    "raw_name": "Columbia Tusculum",
+    "lat": 39.116798,
+    "lon": -84.433982,
+    "property_crimes": 131,
+    "arrest_rate": 0.0611
+  },
+  {
+    "name": "Corryville",
+    "raw_name": "Corryville",
+    "lat": 39.130992,
+    "lon": -84.50758,
+    "property_crimes": 2866,
+    "arrest_rate": 0.2184
+  },
+  {
+    "name": "Cuf",
+    "raw_name": "CUF",
+    "lat": 39.1301,
+    "lon": -84.52118,
+    "property_crimes": 4532,
+    "arrest_rate": 0.0644
+  },
+  {
+    "name": "Downtown",
+    "raw_name": "Downtown",
+    "lat": 39.102362,
+    "lon": -84.512477,
+    "property_crimes": 5013,
+    "arrest_rate": 0.1348
+  },
+  {
+    "name": "East End",
+    "raw_name": "East End",
+    "lat": 39.113106,
+    "lon": -84.455881,
+    "property_crimes": 365,
+    "arrest_rate": 0.0849
+  },
+  {
+    "name": "East Price Hill",
+    "raw_name": "East Price Hill",
+    "lat": 39.111357,
+    "lon": -84.565777,
+    "property_crimes": 4393,
+    "arrest_rate": 0.183
+  },
+  {
+    "name": "East Walnut Hills",
+    "raw_name": "East Walnut Hills",
+    "lat": 39.125812,
+    "lon": -84.479364,
+    "property_crimes": 928,
+    "arrest_rate": 0.0506
+  },
+  {
+    "name": "East Westwood",
+    "raw_name": "East Westwood",
+    "lat": 39.145044,
+    "lon": -84.569224,
+    "property_crimes": 617,
+    "arrest_rate": 0.0924
+  },
+  {
+    "name": "English Woods_North Fairmount",
+    "raw_name": "English Woods_North Fairmount",
+    "lat": 39.140672,
+    "lon": -84.556795,
+    "property_crimes": 196,
+    "arrest_rate": 0.1531
+  },
+  {
+    "name": "Evanston",
+    "raw_name": "Evanston",
+    "lat": 39.140027,
+    "lon": -84.469933,
+    "property_crimes": 1478,
+    "arrest_rate": 0.0934
+  },
+  {
+    "name": "Hartwell",
+    "raw_name": "Hartwell",
+    "lat": 39.213922,
+    "lon": -84.475795,
+    "property_crimes": 1041,
+    "arrest_rate": 0.1018
+  },
+  {
+    "name": "Hyde Park",
+    "raw_name": "Hyde Park",
+    "lat": 39.136974,
+    "lon": -84.441274,
+    "property_crimes": 1229,
+    "arrest_rate": 0.0635
+  },
+  {
+    "name": "Kennedy Heights",
+    "raw_name": "Kennedy Heights",
+    "lat": 39.185359,
+    "lon": -84.412936,
+    "property_crimes": 488,
+    "arrest_rate": 0.082
+  },
+  {
+    "name": "Linwood",
+    "raw_name": "Linwood",
+    "lat": 39.110778,
+    "lon": -84.421378,
+    "property_crimes": 359,
+    "arrest_rate": 0.0947
+  },
+  {
+    "name": "Lower Price Hill_Queensgate",
+    "raw_name": "Lower Price Hill_Queensgate",
+    "lat": 39.10608,
+    "lon": -84.538147,
+    "property_crimes": 1183,
+    "arrest_rate": 0.1074
+  },
+  {
+    "name": "Madisonville",
+    "raw_name": "Madisonville",
+    "lat": 39.159591,
+    "lon": -84.397453,
+    "property_crimes": 1353,
+    "arrest_rate": 0.0746
+  },
+  {
+    "name": "Millvale",
+    "raw_name": "Millvale",
+    "lat": 39.145749,
+    "lon": -84.554795,
+    "property_crimes": 464,
+    "arrest_rate": 0.1703
+  },
+  {
+    "name": "Mt. Adams",
+    "raw_name": "Mt. Adams",
+    "lat": 39.107939,
+    "lon": -84.498677,
+    "property_crimes": 255,
+    "arrest_rate": 0.0353
+  },
+  {
+    "name": "Mt. Airy",
+    "raw_name": "Mt. Airy",
+    "lat": 39.188045,
+    "lon": -84.568906,
+    "property_crimes": 1698,
+    "arrest_rate": 0.0883
+  },
+  {
+    "name": "Mt. Auburn",
+    "raw_name": "Mt. Auburn",
+    "lat": 39.12103,
+    "lon": -84.507769,
+    "property_crimes": 1506,
+    "arrest_rate": 0.0651
+  },
+  {
+    "name": "Mt. Lookout",
+    "raw_name": "Mt. Lookout",
+    "lat": 39.129226,
+    "lon": -84.421873,
+    "property_crimes": 352,
+    "arrest_rate": 0.0284
+  },
+  {
+    "name": "Mt. Washington",
+    "raw_name": "Mt. Washington",
+    "lat": 39.091713,
+    "lon": -84.386444,
+    "property_crimes": 1050,
+    "arrest_rate": 0.1133
+  },
+  {
+    "name": "North Avondale",
+    "raw_name": "North Avondale",
+    "lat": 39.158084,
+    "lon": -84.484309,
+    "property_crimes": 421,
+    "arrest_rate": 0.0831
+  },
+  {
+    "name": "North Fairmount",
+    "raw_name": "North Fairmount",
+    "lat": 39.13397,
+    "lon": -84.555554,
+    "property_crimes": 481,
+    "arrest_rate": 0.1393
+  },
+  {
+    "name": "Northside",
+    "raw_name": "Northside",
+    "lat": 39.164315,
+    "lon": -84.541984,
+    "property_crimes": 1964,
+    "arrest_rate": 0.0764
+  },
+  {
+    "name": "Oakley",
+    "raw_name": "Oakley",
+    "lat": 39.156335,
+    "lon": -84.426514,
+    "property_crimes": 3782,
+    "arrest_rate": 0.3297
+  },
+  {
+    "name": "Over-the-Rhine",
+    "raw_name": "Over-the-Rhine",
+    "lat": 39.112348,
+    "lon": -84.515928,
+    "property_crimes": 4591,
+    "arrest_rate": 0.0793
+  },
+  {
+    "name": "Paddock Hills",
+    "raw_name": "Paddock Hills",
+    "lat": 39.163553,
+    "lon": -84.473332,
+    "property_crimes": 393,
+    "arrest_rate": 0.1094
+  },
+  {
+    "name": "Pendleton",
+    "raw_name": "Pendleton",
+    "lat": 39.10992,
+    "lon": -84.50768,
+    "property_crimes": 761,
+    "arrest_rate": 0.0526
+  },
+  {
+    "name": "Pleasant Ridge",
+    "raw_name": "Pleasant Ridge",
+    "lat": 39.180053,
+    "lon": -84.43079,
+    "property_crimes": 842,
+    "arrest_rate": 0.0772
+  },
+  {
+    "name": "Riverside",
+    "raw_name": "Riverside",
+    "lat": 39.084651,
+    "lon": -84.632634,
+    "property_crimes": 207,
+    "arrest_rate": 0.1643
+  },
+  {
+    "name": "Riverside_Sedamsville",
+    "raw_name": "Riverside_Sedamsville",
+    "lat": 39.088916,
+    "lon": -84.572727,
+    "property_crimes": 491,
+    "arrest_rate": 0.1446
+  },
+  {
+    "name": "Roll Hill",
+    "raw_name": "Roll Hill",
+    "lat": 39.156407,
+    "lon": -84.560222,
+    "property_crimes": 468,
+    "arrest_rate": 0.2073
+  },
+  {
+    "name": "Roselawn",
+    "raw_name": "Roselawn",
+    "lat": 39.19677,
+    "lon": -84.45979,
+    "property_crimes": 2154,
+    "arrest_rate": 0.098
+  },
+  {
+    "name": "Sayler Park",
+    "raw_name": "Sayler Park",
+    "lat": 39.114186,
+    "lon": -84.692369,
+    "property_crimes": 313,
+    "arrest_rate": 0.1565
+  },
+  {
+    "name": "South Cumminsville",
+    "raw_name": "South Cumminsville",
+    "lat": 39.153152,
+    "lon": -84.549726,
+    "property_crimes": 278,
+    "arrest_rate": 0.0935
+  },
+  {
+    "name": "South Fairmount",
+    "raw_name": "South Fairmount",
+    "lat": 39.128196,
+    "lon": -84.557854,
+    "property_crimes": 816,
+    "arrest_rate": 0.1471
+  },
+  {
+    "name": "Spring Grove Village",
+    "raw_name": "Spring Grove Village",
+    "lat": 39.169233,
+    "lon": -84.515287,
+    "property_crimes": 899,
+    "arrest_rate": 0.1691
+  },
+  {
+    "name": "Unknown / Outside City Limits",
+    "raw_name": "Unknown / Outside City Limits",
+    "lat": 39.17257,
+    "lon": -84.514424,
+    "property_crimes": 883,
+    "arrest_rate": 0.12
+  },
+  {
+    "name": "Walnut Hills",
+    "raw_name": "Walnut Hills",
+    "lat": 39.126538,
+    "lon": -84.489777,
+    "property_crimes": 3192,
+    "arrest_rate": 0.1118
+  },
+  {
+    "name": "West End",
+    "raw_name": "West End",
+    "lat": 39.112301,
+    "lon": -84.526211,
+    "property_crimes": 2266,
+    "arrest_rate": 0.0618
+  },
+  {
+    "name": "West Price Hill",
+    "raw_name": "West Price Hill",
+    "lat": 39.115834,
+    "lon": -84.591177,
+    "property_crimes": 3805,
+    "arrest_rate": 0.1682
+  },
+  {
+    "name": "Westwood",
+    "raw_name": "Westwood",
+    "lat": 39.139423,
+    "lon": -84.599827,
+    "property_crimes": 9416,
+    "arrest_rate": 0.2296
+  },
+  {
+    "name": "Winton Hills",
+    "raw_name": "Winton Hills",
+    "lat": 39.187236,
+    "lon": -84.512754,
+    "property_crimes": 1262,
+    "arrest_rate": 0.1046
+  }
+]

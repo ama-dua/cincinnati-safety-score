@@ -1,0 +1,8 @@
+{
+  "ucr_group": {
+    "Auto Theft": 0,
+    "Burglary/BE": 1,
+    "Personal/Other Theft": 2,
+    "Theft from Auto": 3
+  }
+}
