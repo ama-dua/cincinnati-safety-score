@@ -119,10 +119,12 @@ def build_dataset() -> tuple[pd.DataFrame, dict]:
 
 def neighborhood_stats(df: pd.DataFrame) -> list[dict]:
     g = df.groupby("neighborhood")
+    all_years = sorted(int(y) for y in df["year"].unique())
     stats = []
     for name, sub in g:
         hourly = sub.groupby("hour").size().reindex(range(24), fill_value=0)
         top_cat = sub["category"].value_counts()
+        yearly = sub.groupby("year").size()
         stats.append(
             {
                 "name": name.title() if name.isupper() else name,
@@ -134,6 +136,9 @@ def neighborhood_stats(df: pd.DataFrame) -> list[dict]:
                 "hourly_counts": [int(v) for v in hourly.tolist()],
                 "top_category": str(top_cat.index[0]),
                 "top_category_share": round(float(top_cat.iloc[0] / len(sub)), 4),
+                "yearly_counts": {
+                    str(y): int(yearly.get(y, 0)) for y in all_years
+                },
             }
         )
     # Rank by recorded property crimes: 1 = most recorded in the city.
@@ -186,6 +191,10 @@ def main() -> None:
         "citywide_hourly_counts": [
             int(v) for v in df.groupby("hour").size().reindex(range(24), fill_value=0).tolist()
         ],
+        "citywide_yearly_counts": {
+            str(int(y)): int(c)
+            for y, c in df.groupby("year").size().sort_index().items()
+        },
         "feature_importance": {
             f: round(float(v), 4)
             for f, v in zip(FEATURES, model.feature_importances_)
@@ -207,6 +216,23 @@ def main() -> None:
     (MODEL_DIR / "neighborhoods.json").write_text(
         json.dumps(neighborhood_stats(df), indent=2)
     )
+
+    # Half-mile grid of property crimes for the most recent COMPLETE year
+    # in the data. Powers the app's "nearby crimes" improvement; counts
+    # only, no incident-level data ships with the app.
+    max_year = int(df["year"].max())
+    months_in_max = int(df[df["year"] == max_year]["month"].nunique())
+    grid_year = max_year if months_in_max == 12 else max_year - 1
+    cell = 0.004  # degrees, roughly 440 m x 350 m at Cincinnati's latitude
+    recent = df[df["year"] == grid_year]
+    grid_counts: dict[str, int] = {}
+    for lat, lon in zip(recent["lat"], recent["lon"]):
+        key = f"{int(np.floor(lat / cell))},{int(np.floor(lon / cell))}"
+        grid_counts[key] = grid_counts.get(key, 0) + 1
+    (MODEL_DIR / "grid_recent.json").write_text(
+        json.dumps({"year": grid_year, "cell_deg": cell, "counts": grid_counts})
+    )
+    print(f"Grid {grid_year}: {len(grid_counts)} cells, {int(len(recent))} incidents")
     print(f"Artifacts written to {MODEL_DIR}")
 
 

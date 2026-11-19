@@ -22,11 +22,29 @@ Enter a Cincinnati street address (or pick one of the 51 SNA neighborhoods),
 a date and time, and a property-crime type, and the app returns the thesis
 safety score: 1 minus the Random Forest model's estimated likelihood that a
 reported crime there and then was cleared by arrest, benchmarked at 74.6%
-exactly as in thesis section 4.3.2. A one-tap example address is provided
-for first-time visitors. Each result includes the neighborhood's rank among
-the 51 neighborhoods, its most common property-crime type, and a chart of
-recorded crimes by hour of day, and a separate section compares any two
-neighborhoods side by side.
+exactly as in thesis section 4.3.2.
+
+## What is original, and what was added
+
+Kept deliberately separate, in the app and here, so the thesis can be
+evaluated against the original work:
+
+**From the original thesis (2021):** the safety score and its definition,
+Random Forest with SMOTE oversampling, address/date/time/crime-type
+inputs, the 74.6% "very safe" benchmark, and feature importance as the
+explanation view.
+
+**Added in the 2026 rebuild** (all grouped in the app under one heading,
+"Beyond the thesis: improvements added in 2026"): a one-tap example
+address; neighborhood context for each result (rank among the 51
+neighborhoods, most common crime type, crimes by hour of day); a
+year-by-year trend chart; a plain count of property crimes recorded
+within about half a mile of the point in the most recent full year;
+shareable result links; tap-the-map location scoring; and a
+compare-two-neighborhoods tool. Also changed by necessity: the dataset
+is the successor feed (2020-2026), victim demographic inputs are gone
+because the new feed does not publish them, and the reported metrics are
+honest held-out figures with SMOTE kept out of the test data.
 
 A GitHub Actions workflow (`.github/workflows/retrain.yml`) retrains the
 model on the latest city data on the 1st of each month and commits the
