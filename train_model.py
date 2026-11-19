@@ -109,6 +109,7 @@ def build_dataset() -> tuple[pd.DataFrame, dict]:
             "ucr_group": prop["ucr_group"].astype(int),
             "clsd": prop["clsd"].astype(int),
             "neighborhood": prop["SNANeighborhood"].astype(str),
+            "category": prop["StarsCategory"].astype(str),
         }
     )
     # Cincinnati bounding sanity check (matches lat/lon skew note in the source data)
@@ -120,6 +121,8 @@ def neighborhood_stats(df: pd.DataFrame) -> list[dict]:
     g = df.groupby("neighborhood")
     stats = []
     for name, sub in g:
+        hourly = sub.groupby("hour").size().reindex(range(24), fill_value=0)
+        top_cat = sub["category"].value_counts()
         stats.append(
             {
                 "name": name.title() if name.isupper() else name,
@@ -128,8 +131,15 @@ def neighborhood_stats(df: pd.DataFrame) -> list[dict]:
                 "lon": round(float(sub["lon"].mean()), 6),
                 "property_crimes": int(len(sub)),
                 "arrest_rate": round(float(sub["clsd"].mean()), 4),
+                "hourly_counts": [int(v) for v in hourly.tolist()],
+                "top_category": str(top_cat.index[0]),
+                "top_category_share": round(float(top_cat.iloc[0] / len(sub)), 4),
             }
         )
+    # Rank by recorded property crimes: 1 = most recorded in the city.
+    by_volume = sorted(stats, key=lambda s: -s["property_crimes"])
+    for i, s in enumerate(by_volume, start=1):
+        s["rank_by_crimes"] = i
     return sorted(stats, key=lambda s: s["name"])
 
 
@@ -172,6 +182,10 @@ def main() -> None:
         "test_log_loss": round(float(log_loss(y_test, proba)), 4),
         "baseline_accuracy_all_no_arrest": round(baseline, 4),
         "n_test": int(len(y_test)),
+        "n_neighborhoods": int(df["neighborhood"].nunique()),
+        "citywide_hourly_counts": [
+            int(v) for v in df.groupby("hour").size().reindex(range(24), fill_value=0).tolist()
+        ],
         "feature_importance": {
             f: round(float(v), 4)
             for f, v in zip(FEATURES, model.feature_importances_)

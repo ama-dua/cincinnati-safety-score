@@ -9,7 +9,15 @@ Enter a Cincinnati street address (or pick one of the 51 SNA neighborhoods),
 a date and time, and a property-crime type, and the app returns the thesis
 safety score: 1 minus the Random Forest model's estimated likelihood that a
 reported crime there and then was cleared by arrest, benchmarked at 74.6%
-exactly as in thesis section 4.3.2.
+exactly as in thesis section 4.3.2. A one-tap example address is provided
+for first-time visitors. Each result includes the neighborhood's rank among
+the 51 neighborhoods, its most common property-crime type, and a chart of
+recorded crimes by hour of day, and a separate section compares any two
+neighborhoods side by side.
+
+A GitHub Actions workflow (`.github/workflows/retrain.yml`) retrains the
+model on the latest city data on the 1st of each month and commits the
+refreshed artifacts, which Streamlit Community Cloud then redeploys.
 
 ## Run locally
 

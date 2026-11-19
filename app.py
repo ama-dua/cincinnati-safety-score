@@ -96,10 +96,18 @@ def main():
     st.subheader("Check a location")
     mode = st.radio("Location", ["Street address", "Neighborhood"], horizontal=True)
 
+    def _try_example():
+        st.session_state["address"] = "2600 Vine St"
+        st.session_state["auto_predict"] = True
+
+    st.button("Try an example: 2600 Vine St, near the University of Cincinnati",
+              on_click=_try_example)
+
     lat = lon = None
     chosen_name = None
     if mode == "Street address":
-        address = st.text_input("Street address in Cincinnati", placeholder="e.g. 2600 Vine St")
+        address = st.text_input("Street address in Cincinnati", placeholder="e.g. 2600 Vine St",
+                                 key="address")
         if address:
             found = geocode(address)
             if found:
@@ -132,7 +140,7 @@ def main():
         "victim demographics, so this rebuild does not ask for them."
     )
 
-    if st.button("Get my safety score", type="primary"):
+    if st.button("Get my safety score", type="primary") or st.session_state.pop("auto_predict", False):
         if lat is None or lon is None:
             st.error("Add a Cincinnati street address or pick a neighborhood first.")
             return
@@ -162,17 +170,64 @@ def main():
 
         near = nearest_neighborhood(lat, lon, neighborhoods)
         st.subheader(f"Context: {near['name']}")
-        c1, c2, c3 = st.columns(3)
+        c1, c2, c3, c4 = st.columns(4)
         c1.metric("Property crimes recorded", f"{near['property_crimes']:,}")
-        c2.metric("Cleared by arrest there", f"{near['arrest_rate'] * 100:.1f}%")
-        c3.metric("Citywide arrest rate", f"{metrics['arrest_rate'] * 100:.1f}%")
+        c2.metric("Rank of 51 neighborhoods", f"#{near['rank_by_crimes']}")
+        c3.metric("Cleared by arrest there", f"{near['arrest_rate'] * 100:.1f}%")
+        c4.metric("Citywide arrest rate", f"{metrics['arrest_rate'] * 100:.1f}%")
+        st.caption(
+            "Rank 1 means the most recorded property crimes in the city over the data "
+            "period. The most common type recorded in this neighborhood is "
+            f"{CRIME_LABELS.get(near['top_category'], near['top_category'])} "
+            f"({near['top_category_share'] * 100:.0f}% of its property crimes)."
+        )
         st.map(pd.DataFrame({"lat": [lat], "lon": [lon]}), zoom=13)
+        hourly = pd.Series(near["hourly_counts"], index=[f"{h:02d}:00" for h in range(24)])
+        peak_hour = int(pd.Series(near["hourly_counts"]).idxmax())
+        st.write(f"**When property crime is recorded in {near['name']}** (by hour of day, "
+                 f"peaking around {peak_hour:02d}:00):")
+        st.bar_chart(hourly)
 
         with st.expander("What the model weighed most (feature importance)"):
             imp = pd.Series(metrics["feature_importance"]).sort_values(ascending=True)
             st.bar_chart(imp)
         with st.expander("Encoded input sent to the model"):
             st.dataframe(sample)
+
+    st.divider()
+    st.subheader("Compare two neighborhoods")
+    names_sorted = [n["name"] for n in neighborhoods]
+    by_name = {n["name"]: n for n in neighborhoods}
+    default_b = "Oakley" if "Oakley" in names_sorted else names_sorted[1]
+    default_a = "Westwood" if "Westwood" in names_sorted else names_sorted[0]
+    col_a, col_b = st.columns(2)
+    with col_a:
+        pick_a = st.selectbox("Neighborhood A", names_sorted, index=names_sorted.index(default_a), key="cmp_a")
+    with col_b:
+        pick_b = st.selectbox("Neighborhood B", names_sorted, index=names_sorted.index(default_b), key="cmp_b")
+    a, b = by_name[pick_a], by_name[pick_b]
+    comp = pd.DataFrame(
+        {
+            pick_a: [
+                f"{a['property_crimes']:,}", f"#{a['rank_by_crimes']} of 51",
+                f"{a['arrest_rate'] * 100:.1f}%",
+                f"{CRIME_LABELS.get(a['top_category'], a['top_category'])} ({a['top_category_share'] * 100:.0f}%)",
+            ],
+            pick_b: [
+                f"{b['property_crimes']:,}", f"#{b['rank_by_crimes']} of 51",
+                f"{b['arrest_rate'] * 100:.1f}%",
+                f"{CRIME_LABELS.get(b['top_category'], b['top_category'])} ({b['top_category_share'] * 100:.0f}%)",
+            ],
+        },
+        index=["Property crimes recorded", "Rank by recorded crimes",
+               "Cleared by arrest", "Most common type"],
+    )
+    st.table(comp)
+    st.write("**Recorded property crimes by hour of day:**")
+    st.bar_chart(pd.DataFrame(
+        {pick_a: a["hourly_counts"], pick_b: b["hourly_counts"]},
+        index=[f"{h:02d}:00" for h in range(24)],
+    ))
 
     st.divider()
     st.subheader("How this works, honestly")
@@ -186,14 +241,14 @@ def main():
     m = pd.DataFrame(
         {
             "This rebuild (held-out test)": [
-                metrics["test_accuracy"], metrics["test_roc_auc"],
-                metrics["test_recall"], metrics["test_precision"],
+                f"{metrics['test_accuracy']:.2f}", f"{metrics['test_roc_auc']:.2f}",
+                f"{metrics['test_recall']:.2f}", f"{metrics['test_precision']:.2f}",
             ],
-            "Thesis (2021)": [0.8847, 0.95, 0.88, None],
+            "Thesis (2021)": ["0.88", "0.95", "0.88", "—"],
         },
         index=["Accuracy", "ROC AUC", "Recall", "Precision"],
     )
-    st.dataframe(m.style.format("{:.2f}", na_rep="—"))
+    st.table(m)
     st.write(
         "Why lower than the thesis's 88%? Two reasons. The thesis applied SMOTE to the whole "
         "dataset before splitting, which leaks resampled data into the test set and inflates "
