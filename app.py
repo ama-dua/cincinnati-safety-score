@@ -110,6 +110,18 @@ def main():
         "Predicting Neighborhood Safety in The City of Cincinnati.*"
     )
 
+    st.subheader("What this app is trying to say")
+    st.write(
+        "You do not have to guess whether a place feels safe. The city's own crime "
+        "history can give you a number for a specific place, at a specific time, "
+        "right on your phone. Most crime research studies offenders, who might "
+        "offend again. This work flipped the question to victims, and asked what "
+        "their patterns in the data could teach the rest of us about avoiding "
+        "becoming one. Safety is not a fixed property of a neighborhood. It "
+        "changes with the hour and the day, and it can be estimated, imperfectly, "
+        "from patterns instead of impressions."
+    )
+
     st.subheader("Check a location")
     mode = st.radio("Location", ["Street address", "Neighborhood"], horizontal=True)
 
