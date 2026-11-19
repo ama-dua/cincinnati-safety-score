@@ -46,8 +46,25 @@ CRIME_LABELS = {
 BENCHMARK = 0.746  # Thesis 4.3.2: Cincinnati property-crime rate benchmark (BestPlaces, 2021)
 
 
+def _data_version() -> str:
+    """Hash of the small data files, used as the cache key below.
+
+    Without this, Streamlit's cache can keep serving the previous
+    neighborhoods/metrics after a redeploy that only changed the data
+    files (which is exactly what the monthly retrain does), pairing new
+    code with stale data. Hashing the files makes any data change load
+    fresh artifacts.
+    """
+    import hashlib
+
+    h = hashlib.sha256()
+    for name in ("metrics.json", "neighborhoods.json", "encodings.json"):
+        h.update((MODEL_DIR / name).read_bytes())
+    return h.hexdigest()
+
+
 @st.cache_resource
-def load_artifacts():
+def load_artifacts(version: str):
     model = joblib.load(MODEL_DIR / "safety_model.joblib")
     metrics = json.loads((MODEL_DIR / "metrics.json").read_text())
     encodings = json.loads((MODEL_DIR / "encodings.json").read_text())
@@ -83,7 +100,7 @@ def nearest_neighborhood(lat: float, lon: float, neighborhoods: list[dict]) -> d
 
 def main():
     st.set_page_config(page_title="Cincinnati Neighborhood Safety Score", page_icon="🛡️", layout="centered")
-    model, metrics, encodings, neighborhoods = load_artifacts()
+    model, metrics, encodings, neighborhoods = load_artifacts(_data_version())
     cat_map = encodings["ucr_group"]
 
     st.title("Cincinnati Neighborhood Safety Score")
